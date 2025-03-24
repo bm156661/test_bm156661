@@ -10,6 +10,10 @@ Am Ende müssen Sie Ihr Projekt commiten und pushen. Senden Sie mir den Link in 
 ## Aufgabe 2
 
 Beantworten Sie die folgenden Frage hier direkt im Text: Welche Aufgabe haben cookies in unserer Banking-App?
+- Benutzer sind nach der Anmeldung weiter angemeldet, ohne sich man sich immer neu anmelden muss. Sie ermöglichen eine personalisierte Nutzung, beispielsweise durch Einstellung von Sprache...
+
+Warum sind Passkeys besser, als die Kombination aus Benutzername / Kennwort?
+- Passkeys sind sicherer, da sie sogenannte Pishing-Angriffe verhindern und keine Passwörter speichern. Für die Nutzer ist es bequem und einfach. 
 
 ## Aufgabe 3
 

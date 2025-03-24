@@ -5,6 +5,7 @@ class Kunde{
 		this.Vorname
 		this.Benutzername
 		this.Kennwort
+		this.Email
 		// IstEingeloggt ist ein boolean.
 		// Der Wert ist entweder wahr oder falsch.
 		this.IstEingeloggt
@@ -19,9 +20,10 @@ kunde.Nachname = "Kiff"
 kunde.Vorname = "Pit"
 kunde.Benutzername = "pk"
 kunde.Kennwort = "123"
+kunde.Email = 'p.kiff@borken-bank.de'
 kunde.IstEingeloggt = false
 
-// Klassenefinition des Kundenberaters
+// Klassendefinition des Kundenberaters
 class Kundenberater{
 	constructor(){
 		this.Nachname
@@ -161,12 +163,12 @@ app.get('/agb', (req, res) => {
 	if(kunde.IstEingeloggt){
 
 		// Wenn die Zugangsdaten korrekt sind, dann wird die angesurfte Seite gerendert.
-		res.render('login.ejs',{});
+		res.render('agb.ejs',{});
 
 	}else{
 		
 		// Wenn die Zugangsdaten nicht korrekt sind, dann wird die login-Seite gerendert.
-		res.render('agb.ejs',{
+		res.render('login.ejs',{
 			Meldung: "Melden Sie sich zuerst an."
 		});
 	}
@@ -263,7 +265,22 @@ app.post('/profil', (req, res) => {
 });
 
 app.get('/postfach', (req, res) => {
-	res.render('postfach.ejs',{});
+
+	if(kunde.IstEingeloggt){
+
+		// Wenn die Zugangsdaten korrekt sind, dann wird die angesurfte Seite gerendert.
+		res.render('postfach.ejs',{
+			Meldung: "",
+			Email: kunde.Mail
+		});
+
+	}else{
+		
+		// Wenn die Zugangsdaten nicht korrekt sind, dann wird die login-Seite gerendert.
+		res.render('login.ejs',{
+			Meldung: "Melden Sie sich zuerst an."
+		});
+	}
 });
 
 // Sobald die Seite "Kredit beantragen" aufgerufen wird, wird die app.get abgearbeitet.
@@ -373,7 +390,7 @@ app.post('/geldAnlegen', (req, res) => {
 
 	let zinssatz = 0.1
 
-	let zinsen = betrag * zinssatz;
+	let zinsen = betrag * Math.pow(1 + zinssatz, laufzeit);
 
 
 	if(kunde.IstEingeloggt){
@@ -382,7 +399,7 @@ app.post('/geldAnlegen', (req, res) => {
 		res.render('geldAnlegen.ejs',{
 			Betrag: betrag,
 			Laufzeit: laufzeit,
-			Meldung: "Ihre Zinsen betragen: " + zinsen
+			Meldung: "Ihre Zinsen betragen: " + zinsen + ' Der Zinssatz beträgt immer 10%'
 		});
 
 	}else{
